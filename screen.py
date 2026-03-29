@@ -1,8 +1,8 @@
 """
-LLM-driven abstract screening pipeline for scoping and systematic reviews.
+ML-assisted abstract screening pipeline for scoping and systematic reviews.
 
 Reads a CSV of titles and abstracts (e.g., exported from Covidence), sends each
-to an OpenAI LLM using the Abstract ScreenPrompt methodology, and writes
+to an OpenAI model using the Abstract ScreenPrompt methodology, and writes
 screening decisions to an output CSV.
 
 Methodology based on:
@@ -68,7 +68,7 @@ def extract_reasoning(text: str) -> str:
 
 
 def parse_last_line_decision(text: str) -> str:
-    """Parse the LLM output for a YYY (include) or XXX (exclude) decision.
+    """Parse the model output for a YYY (include) or XXX (exclude) decision.
 
     Checks for an explicit terminal YYY/XXX token, then falls back to scanning
     'Decision:' lines, common synonyms, and heuristic signals in the reasoning.
@@ -209,7 +209,7 @@ def screen_abstract(client, model: str, prompt: str, temperature: float,
 
 def main():
     ap = argparse.ArgumentParser(
-        description="LLM-driven abstract screening for scoping/systematic reviews."
+        description="ML-assisted abstract screening for scoping/systematic reviews."
     )
     ap.add_argument("--csv", required=True,
                     help="Input CSV with Title and Abstract columns (e.g., Covidence export)")

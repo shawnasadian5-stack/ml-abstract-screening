@@ -1,12 +1,12 @@
 """
-Prompt builder for LLM-driven abstract screening.
+Prompt builder for ML-assisted abstract screening.
 
 Implements the Abstract ScreenPrompt pattern from:
   Cao et al. (2025). "Development of Prompt Templates for Large Language
   Model-Driven Screening in Systematic Reviews." Ann Intern Med.
   doi:10.7326/ANNALS-24-02189
 
-The prompt uses Framework Chain-of-Thought (CoT) reasoning: the LLM is given
+The prompt uses Framework Chain-of-Thought (CoT) reasoning: the model is given
 study objectives, numbered inclusion/exclusion criteria, and instructed to
 evaluate each criterion step-by-step before making a YYY (include) or
 XXX (exclude) decision.
@@ -43,7 +43,7 @@ def build_abstract_prompt(
         exclusion: List of exclusion criteria strings.
 
     Returns:
-        A formatted prompt string ready to send to the LLM.
+        A formatted prompt string ready to send to the model.
     """
     inc_block = "\n".join(f"{i+1}. {line}" for i, line in enumerate(inclusion))
     exc_block = "\n".join(f"{i+1}. {line}" for i, line in enumerate(exclusion))

@@ -1,6 +1,6 @@
-# LLM-Driven Abstract Screening Pipeline for Scoping and Systematic Reviews
+# ML-Assisted Abstract Screening Pipeline for Scoping and Systematic Reviews
 
-A reusable, open-source pipeline that uses large language models (LLMs) to screen titles and abstracts for scoping and systematic reviews. Designed so that **no coding knowledge is needed** — you configure your review criteria in a single file and run one command.
+A reusable, open-source machine learning (ML) pipeline that screens titles and abstracts for scoping and systematic reviews. Designed so that **no coding knowledge is needed** — you configure your review criteria in a single file and run one command.
 
 This pipeline implements the *Abstract ScreenPrompt* methodology from Cao et al. (2025), which uses Framework Chain-of-Thought (CoT) prompting to achieve high sensitivity (97.7%) and specificity (85.2%) across diverse systematic reviews.
 
@@ -18,7 +18,7 @@ The prompting methodology is based on:
 
 1. You export your search results from Covidence (or any reference manager) as a CSV file containing titles and abstracts.
 2. You fill in `config.yaml` with your review's objectives, inclusion criteria, and exclusion criteria.
-3. The pipeline sends each abstract to an OpenAI LLM with a structured prompt that instructs the model to evaluate each criterion step-by-step.
+3. The pipeline sends each abstract to an OpenAI model with a structured prompt that instructs the model to evaluate each criterion step-by-step.
 4. The model outputs a reasoned decision: **YYY** (include/uncertain) or **XXX** (exclude).
 5. Results are saved to a CSV file you can import back into Covidence or use directly.
 
@@ -71,7 +71,7 @@ Open `config.yaml` in any text editor. Fill in three sections:
 
 ### 1. Review Objectives
 
-Describe what your review is about. Be specific — the LLM uses this to understand the scope of your review.
+Describe what your review is about. Be specific — the model uses this to understand the scope of your review.
 
 ```yaml
 review_objectives: >
@@ -140,7 +140,7 @@ python screen.py --csv your_abstracts.csv --model gpt-4o-mini
 For large datasets (hundreds or thousands of abstracts), you can process records in batches using the `--limit` flag. This is useful for:
 
 - **Cost control** — review a small batch of results before committing to the full run
-- **Monitoring quality** — check that the LLM is making reasonable decisions on your criteria
+- **Monitoring quality** — check that the model is making reasonable decisions on your criteria
 - **Crash resilience** — progress is saved after every single record, so nothing is lost
 
 ### How it works
@@ -171,7 +171,7 @@ The pipeline produces a CSV file (default: `decisions.csv`) with three columns:
 |--------|-------------|
 | `record_id` | The record identifier from your CSV (Covidence #, Accession Number, or row number) |
 | `decision` | `YYY` (include for full-text review) or `XXX` (exclude) |
-| `rationale` | The LLM's step-by-step reasoning for the decision |
+| `rationale` | The model's step-by-step reasoning for the decision |
 
 ### Interpreting results
 
@@ -199,7 +199,7 @@ If none of these are present, the pipeline uses the row number as the record ID.
 
 ## Tips
 
-- **Start small.** Always test with `--limit 5` first to verify the LLM is interpreting your criteria correctly.
+- **Start small.** Always test with `--limit 5` first to verify the model is interpreting your criteria correctly.
 - **Be specific in your criteria.** Vague criteria lead to inconsistent screening. Use the PCC or PICO framework.
 - **Review the rationale column.** It tells you *why* each decision was made, which helps you spot systematic issues.
 - **Cost awareness.** Each abstract costs approximately $0.001–$0.01 depending on the model. A full run of 1,000 abstracts with `gpt-4o` costs roughly $2–$5.

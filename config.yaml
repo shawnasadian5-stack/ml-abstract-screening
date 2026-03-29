@@ -1,5 +1,5 @@
 # ==============================================================================
-# LLM Abstract Screening Pipeline — Configuration
+# ML-Assisted Abstract Screening Pipeline — Configuration
 # ==============================================================================
 # Fill in the fields below with your own scoping/systematic review details.
 # This file is the only thing you need to edit before running the pipeline.
@@ -14,7 +14,7 @@
 # --- Your Review Details ---
 
 # Describe the objectives of your scoping or systematic review.
-# Be specific — the LLM uses this to understand what your review is about.
+# Be specific — the model uses this to understand what your review is about.
 review_objectives: >
   Replace this with your review objectives. For example:
   "To systematically map patient perspectives on AI integration in healthcare
